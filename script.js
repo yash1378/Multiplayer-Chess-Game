@@ -40,6 +40,7 @@ function paint(){
 window.requestAnimationFrame(paint);
 
 
+
 // Create a 2D array to represent the chessboard
 var chessboard = [
     ['WR', 'WN', 'WB', 'WQ', 'WK', 'WB', 'WN', 'WR'],
@@ -158,7 +159,7 @@ function movepiece() {
 
     //for bishop movement ----------------------------------------------------------------------------------------------------------------->
 
-    else if(chessboard[a][b]==='WB'){
+    else if(chessboard[a][b]==='WB' || chessboard[a][b]==='BB' ){
       if(a-c === b-d || a-c === d-b ){
         if(c<a && d<b){
           while(a!==c && b!==d){
@@ -239,91 +240,13 @@ function movepiece() {
     }
 
 
-    else if(chessboard[a][b]==='BB'){
-      if(a-c === b-d || a-c === d-b ){
-        if(c<a && d<b){
-          while(a!==c && b!==d){
-            if(chessboard[a-1][b-1]!==''){
-              chessboard[a-1][b-1] = chessboard[a][b];
-              chessboard[a][b]='';
-              a=a-1;
-              b=b-1;
-              break;
-            }
-            else{  
-            chessboard[a-1][b-1] = chessboard[a][b];
-            chessboard[a][b]='';
-            a=a-1;
-            b=b-1;
 
-            }
-          }
-        }
-
-        else if(c>a && d>b){
-          while(a!==c && b!==d){
-            if(chessboard[a+1][b+1]!==''){
-              chessboard[a+1][b+1] = chessboard[a][b];
-              chessboard[a][b]='';
-              a=a+1;
-              b=b+1;
-              break;
-            }
-            else{  
-            chessboard[a+1][b+1] = chessboard[a][b];
-            chessboard[a][b]='';
-            a=a+1;
-            b=b+1;
-            }
-          }
-        }
-
-        else if(c>a && d<b){
-          while(a!==c && b!==d){
-            if(chessboard[a+1][b-1]!==''){
-              chessboard[a+1][b-1] = chessboard[a][b];
-              chessboard[a][b]='';
-              a=a+1;
-              b=b-1;
-              break;
-            }
-            else{ 
-            chessboard[a+1][b-1] = chessboard[a][b];
-            chessboard[a][b]='';
-            a=a+1;
-            b=b-1;
-            }
-          }
-        }
-
-        else if(c<a && d>b){
-          while(a!==c && b!==d){
-            if(chessboard[a-1][b+1]!==''){
-              chessboard[a-1][b+1] = chessboard[a][b];
-              chessboard[a][b]='';
-              a=a-1;
-              b=b+1;
-              break;
-            }
-            else{ 
-            chessboard[a-1][b+1] = chessboard[a][b];
-            chessboard[a][b]='';
-            a=a-1;
-            b=b+1;
-            }
-          }
-        }
-      }
-      else{
-        alert('invalid move');
-      }     
-    }
 
     // ------------------------------------------------------------------------------------------------------------------------------------------------->
 
     // for Rook Movement --------------------------------------------------------------------------------------------------------------------------------------------->
 
-    else if(chessboard[a][b]==='WR'){
+    else if(chessboard[a][b]==='WR' || chessboard[a][b]==='BR'){
       if(a===c || b===d){
         if(a===c){
           if(b>d){
@@ -389,9 +312,13 @@ function movepiece() {
       else{
         alert('invalid move');
       }
+
     }
 
-    else if(chessboard[a][b]==='BR'){
+// ----------------------------------------------------------------------------------------------------------------------------------------------->
+
+// for Queen movement----------------------------------------------------------------------------------------------------------------------------->
+    else if(chessboard[a][b]==='WQ' || chessboard[a][b]==='BQ'){
       if(a===c || b===d){
         if(a===c){
           if(b>d){
@@ -454,15 +381,91 @@ function movepiece() {
           }         
         }
       }
+
+
+      else if(a-c === b-d || a-c === d-b ){
+        if(c<a && d<b){
+          while(a!==c && b!==d){
+            if(chessboard[a-1][b-1]!==''){
+              chessboard[a-1][b-1] = chessboard[a][b];
+              chessboard[a][b]='';
+              a=a-1;
+              b=b-1;
+              break;
+            }
+            else{  
+            chessboard[a-1][b-1] = chessboard[a][b];
+            chessboard[a][b]='';
+            a=a-1;
+            b=b-1;
+
+            }
+          }
+        }
+
+        else if(c>a && d>b){
+          while(a!==c && b!==d){
+            if(chessboard[a+1][b+1]!==''){
+              chessboard[a+1][b+1] = chessboard[a][b];
+              chessboard[a][b]='';
+              a=a+1;
+              b=b+1;
+              break;
+            }
+            else{  
+            chessboard[a+1][b+1] = chessboard[a][b];
+            chessboard[a][b]='';
+            a=a+1;
+            b=b+1;
+            }
+          }
+        }
+
+        else if(c>a && d<b){
+          while(a!==c && b!==d){
+            if(chessboard[a+1][b-1]!==''){
+              chessboard[a+1][b-1] = chessboard[a][b];
+              chessboard[a][b]='';
+              a=a+1;
+              b=b-1;
+              break;
+            }
+            else{ 
+            chessboard[a+1][b-1] = chessboard[a][b];
+            chessboard[a][b]='';
+            a=a+1;
+            b=b-1;
+            }
+          }
+        }
+
+        else if(c<a && d>b){
+          while(a!==c && b!==d){
+            if(chessboard[a-1][b+1]!==''){
+              chessboard[a-1][b+1] = chessboard[a][b];
+              chessboard[a][b]='';
+              a=a-1;
+              b=b+1;
+              break;
+            }
+            else{ 
+            chessboard[a-1][b+1] = chessboard[a][b];
+            chessboard[a][b]='';
+            a=a-1;
+            b=b+1;
+            }
+          }
+        }
+      }
       else{
         alert('invalid move');
-      }
+      }  
     }
 
 
 
 
-
+// ---------------------------------------------------------------------------------------------------------------------------------------------->
 
 
 
