@@ -1,5 +1,8 @@
+
+
+
 .main-frame{
-    border: 2px solid #bc00a3;
+    border: 2px solid white;
     position: absolute;
     left: 450px;
     height: 667px;
@@ -12,7 +15,30 @@
 
 .square {
     background-color: #eee;
-    border: 1px solid #999;
+    border: 1px solid white;
+    font-size: 50px;
+    text-align: center;
+  }
+  .square:hover {
+    background-color: #eee;
+    border: 1px solid white;
+    font-size: 50px;
+    text-align: center;
+    cursor:pointer;
+  }
+
+  .square1 {
+    background-color: #bc00a3;
+    border: 1px solid  white;
+    font-size: 50px;
+    text-align: center;
+  }
+  .square1:hover {
+    background-color:#bc00a3;
+    border: 1px solid  white;
+    font-size: 50px;
+    text-align: center;
+    cursor:pointer;
   }
 
 
