@@ -1,44 +1,42 @@
-const express = require('express');
-const app = express();
+
+
+//database mongo db
 
 const mongoose = require('mongoose');
+require('./db/conn');
+const User = require('./model/userSchema');
 
 
 //server
+const express = require('express');
+const app = express();
 const http = require('http');
 const socketIO = require('socket.io');
 const server = http.createServer(app);
 const io = socketIO(server);
 
-require('./db/conn');
-
-// const User = require("../model/userSchema");
-
-const User = require('./model/userSchema');
 
 
+//variables
 let connectedPlayers = 0;
 var roomno=1;
 var full = 0;
 
 io.on('connection',(socket)=>{
   connectedPlayers++;
-  // if(full==0){
-  //   let n1 = prompt("Enter Your Name ");
-  // }
 
   console.log('A user connected');
-
   console.log('Connected players:', connectedPlayers);
 
-  // var r = roomno.toString();
+
   r=roomno.toString();
+
+  //room joining
   socket.join("room-"+r);
   io.sockets.in("room-"+r).emit('connectedRoom',"room-"+r);
   io.sockets.in("room-"+r).emit('mes',full);
 
   full++;
-
   if(full>=4){
     full=0;
     roomno++;
@@ -48,14 +46,8 @@ io.on('connection',(socket)=>{
 
 
   socket.on('movePiece', (moveData) => {
-    // Handle the chess piece movement logic
-    // ...
     console.log(moveData);
-
     io.to(moveData.roomno).emit('pieceMoved',moveData);
-  
-
-
     // Broadcast the move to all connected clients except the sender
     // io.emit('pieceMoved', moveData);
   });
@@ -76,9 +68,10 @@ const port = process.env.PORT || 6025;
 app.use(express.json());
 app.use(express.static('./public'));
 app.use(express.static('./Login'));
+
+
 // Set up the body parser middleware to parse request bodies
 app.use(express.urlencoded({ extended: true }));
-// app.use(require('./Router/auth'));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
@@ -89,6 +82,7 @@ app.get('/login',(req,res)=>{
 })
 app.post('/login',async (req,res)=>{
   console.log(req.body);
+
   //due to this res.json the header is getting setup and further it can't set headers as they are being sent to the client 
   // res.json({message:req.body});
   if(!req.body.name || !req.body.phone){
@@ -105,6 +99,7 @@ app.post('/login',async (req,res)=>{
     const  user2 = await user1.save();
     if(user2){
         // res.status(201).json({message:"user data saved successfully)"});
+        //this is to redirect it to the board page
         res.writeHead(302, {
           'Location': 'http://localhost:6025/'
         });
