@@ -45,6 +45,8 @@ const socket = io();
 let name1= "yogi";
 var roomno=0;
 
+var play=0;
+
 socket.on('connect', () => {
   console.log('Connected to the server');
 });
@@ -53,6 +55,11 @@ socket.on('connectedRoom',(data)=>{
   console.log(data);
   roomno=data;
   // roomno=data.toString();
+})
+
+socket.on('mes',(data1)=>{
+  console.log(data1);
+  // play=data1;
 })
 
 socket.on('connectionRejected', (message) => {
@@ -68,19 +75,35 @@ socket.on('disconnect', () => {
 });
 
 
-// Create a 2D array to represent the chessboard
-var chessboard = [
-  ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖'],
-  ['♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙'],
-  ['','','','','','','',''],
-  ['','','','','','','',''],
-  ['','','','','','','',''],
-  ['','','','','','','',''],
-  ['♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎'],
-  ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜']
-  // Add more rows for the initial chessboard configuration
+var chessboard=[
+  ['0','0','0','0','0','0','0','0'],
+  ['0','0','0','0','0','0','0','0'],
+  ['0','0','0','0','0','0','0','0'],
+  ['0','0','0','0','0','0','0','0'],
+  ['0','0','0','0','0','0','0','0'],
+  ['0','0','0','0','0','0','0','0'],
+  ['0','0','0','0','0','0','0','0'],
+  ['0','0','0','0','0','0','0','0']
 ];
 
+
+// Create a 2D array to represent the chessboard
+
+  chessboard = [
+    ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖'],
+    ['♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙'],
+    ['','','','','','','',''],
+    ['','','','','','','',''],
+    ['','','','','','','',''],
+    ['','','','','','','',''],
+    ['♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎'],
+    ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜']
+    // Add more rows for the initial chessboard configuration
+  ];
+
+
+
+// play++;
 // Render the chessboard
 var chessboardDiv = document.getElementsByClassName('main-frame')[0];
 for (var row = 0; row < chessboard.length; row++) {
@@ -584,7 +607,6 @@ function movepiece() {
 
 
 function move(A,B,C,D) {
-
   if(A===C && B===D){
    chessboard[C][D]=chessboard[A][B];
  }
