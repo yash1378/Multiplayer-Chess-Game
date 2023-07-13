@@ -968,10 +968,17 @@ function move(A,B,C,D) {
 // ------------------------------------------------------------------------------------------------------------------------------------------>
 // ------------------------------------------------------------------------------------------------------------------------------------->
  
+
+
+// for (var row = 0; row < chessboard.length; row++) {
+//   for (var col = 0; col < chessboard[row].length; col++) {
+
+
  // Clear the board and render the updated chessboard
  chessboardDiv.innerHTML = '';
  for (var row = 0; row < chessboard.length; row++) {
-   for (var col = 0; col < chessboard[row].length; col++) {
+  for (var col = 0; col < chessboard[row].length; col++) {
+
      var square = document.createElement('div');
      if((row+col)%2===0){
        square.classList.add('square');

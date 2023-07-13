@@ -11,6 +11,7 @@ const User = require('./model/userSchema');
 const express = require('express');
 const app = express();
 const http = require('http');
+
 const socketIO = require('socket.io');
 const server = http.createServer(app);
 const io = socketIO(server);
@@ -36,11 +37,15 @@ io.on('connection',(socket)=>{
   io.sockets.in("room-"+r).emit('connectedRoom',"room-"+r);
   io.sockets.in("room-"+r).emit('mes',full);
 
+  console.log("full->"+full+" room-> "+roomno);
+
   full++;
-  if(full>=4){
+  if(full>=2){
     full=0;
     roomno++;
   }
+// 
+  // if(connected)
 
 
 
@@ -54,6 +59,7 @@ io.on('connection',(socket)=>{
 
   socket.on('disconnect', () => {
     connectedPlayers--;
+    // full--;
     if(connectedPlayers===0){
       roomno=1;
     }
@@ -73,7 +79,7 @@ app.use(express.static('./Login'));
 // Set up the body parser middleware to parse request bodies
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/board', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
@@ -91,7 +97,11 @@ app.post('/login',async (req,res)=>{
 
   const userExist  = await User.findOne({name:req.body.name})
   if(userExist){
-      return res.status(422).json({error:"name already exist"});
+      // return res.status(422).json({error:"name already exist"});
+      res.writeHead(302, {
+        'Location': 'http://localhost:6025/board'
+      });
+      res.end();
   }
 
     const user1 = new User({name:req.body.name,phone:req.body.phone});
@@ -101,7 +111,7 @@ app.post('/login',async (req,res)=>{
         // res.status(201).json({message:"user data saved successfully)"});
         //this is to redirect it to the board page
         res.writeHead(302, {
-          'Location': 'http://localhost:6025/'
+          'Location': 'http://localhost:6025/board'
         });
         res.end();
     }

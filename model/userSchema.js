@@ -5,6 +5,6 @@ const userSchema = new mongoose.Schema({
     phone:String
 })
 
-const User = mongoose.model('playersdata',userSchema);
+const User = mongoose.model('players',userSchema);
 
 module.exports = User;
