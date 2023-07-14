@@ -1,5 +1,12 @@
 
-
+body{
+  /* background-image: url('./back.jpg');
+  background-repeat: no-repeat;
+  background-size:contain;
+  height: 700px;
+  width: 2300px; */
+  background-color: rgb(118, 244, 118);
+}
 
 .main-frame{
     border: 2px solid white;
@@ -52,22 +59,26 @@
   .name1{
     border: 2px solid green;
     position: absolute;
-    height: 17vh;
+    height: 7vh;
     width: 20vw;
+    font-size: 50px;
+    /* vertical-align: middle; */
+    /* padding-bottom: 5px; */
     text-align: center;
     left: 2.5vw;
-    top: 0;
+    top: 30px;
   }
 
   .name2{
     border: 2px solid green;
     position: absolute;
-    height: 17vh;
+    height: 7vh;
     width: 20vw;
+    font-size: 50px;
     text-align: center;
-    vertical-align:middle;
+    /* vertical-align:middle; */
     left: 2.5vw;
-    bottom: 0;
+    bottom: 30px;
   }
   .clock{
     border: 2px solid green;

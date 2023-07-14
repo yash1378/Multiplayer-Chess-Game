@@ -45,7 +45,12 @@ const socket = io();
 let name1= "yogi";
 var roomno=0;
 
+var naam="Yogi";
+var nom="Player1";
+
 var play=0;
+
+var t=1;
 
 socket.on('connect', () => {
   console.log('Connected to the server');
@@ -57,6 +62,29 @@ socket.on('connectedRoom',(data)=>{
   // roomno=data.toString();
 })
 
+socket.on('conn',(dat)=>{
+  console.log(dat);
+  naam=dat;
+  if(t==1){
+    document.getElementById("name1").innerHTML=naam;
+    nom=naam;
+    t++;
+  }
+  else if(t==2){
+    var dt = {nom,naam};
+    //this is to send both names to server 
+    socket.emit('names',dt);
+    t=1;
+  }
+})
+
+
+//this connection is to change both names in both players screen
+socket.on('messg',(tada)=>{
+//     document.getElementById("name1").innerHTML=tada.nom;
+//     document.getElementById("name2").innerHTML=tada.naam;
+})
+
 socket.on('mes',(data1)=>{
   console.log(data1);
   // play=data1;
@@ -66,12 +94,14 @@ socket.on('connectionRejected', (message) => {
   console.log('Connection rejected:', message);
   // alert(message);
   socket.disconnect();
+  t--;
   alert(message);
   window.location.href = 'https://www.google.com/';
 });
 
 socket.on('disconnect', () => {
   console.log('Disconnected from the server');
+  t--;
 });
 
 
@@ -122,6 +152,8 @@ for (var row = 0; row < chessboard.length; row++) {
     chessboardDiv.appendChild(square);
   }
 }
+
+
 
 // Add event listener to each square
 var squares = document.getElementsByClassName('square');
