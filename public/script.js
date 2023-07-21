@@ -41,6 +41,7 @@
 
 // Create a Socket.io instance and connect to the server
 const socket = io();
+var newton=0;
 // let name1 = prompt("Enter your Name ");
 let name1= "yogi";
 var roomno=0;
@@ -1061,11 +1062,16 @@ socket.on('pieceMoved', (moveData) => {
   // Function to handle click events on chessboard blocks
 });
 
-var matchtime1 = 600;
-var matchtime2 = 600;
-
 const white = document.getElementById('white')
 const black = document.getElementById('black')
+
+var matchtime1 = 600;
+var matchtime2 = 600;
+white.textContent = 600;
+black.textContent = 600;
+
+
+
 
 
 
@@ -1087,8 +1093,8 @@ function startCounter() {
     } else {
       clearInterval(interval); // Stop the interval
       clock.textContent = '';
-      white.textContent = matchtime1;
-      black.textContent = matchtime2;
+      // white.textContent = 600;
+      // black.textContent = 600;
       socket.emit('match', 'match start');
     }
   }, 1000 * count);
@@ -1102,36 +1108,38 @@ socket.on('meg',(dta)=>{
 })
 
 
+
+
 socket.on('matchstarted',(rata)=>{
   // console.log(rata);
-  matchCounter();
+  if(newton===0){
+    matchCounter();
+  }
+  newton++;
+
 })
 
 
-var ca = 1;
+// var ca = 1;
 var da = 1;
 
 
 
-function matchCounter(){
-  setInterval(()=>{
-    if(variable%2==0){
-      white.textContent = matchtime1;
-      console.log("utube")
-      matchtime1--;
-      ca++;
-    }
-    if(matchtime1==0 && matchtime2!=0){
-      alert('Black Wins')
-    }
-    if(matchtime1!=0 && matchtime2 ==0 ){
-      alert('White Wins')
-    }
-    else{
-      black.textContent = matchtime2;
-      matchtime2--;
-      ca++;
-    }
-  },1000*ca);
+function matchCounter() {
+    setInterval(() => {
+      if(variable%2===0){
+        console.log("even");
+        white.textContent = matchtime1;
+        matchtime1--;
+      }
+      else{
+        console.log("odd");
+        black.textContent = matchtime2;
+        matchtime2--;
+      }
+    }, 1000);
 
 }
+
+
+

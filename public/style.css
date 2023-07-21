@@ -101,6 +101,7 @@ body{
 
   .timer{
     border: 2px solid red;
+    font-size: 90px;
     height: 12vh;
     width: 15vw;
     position: absolute;
