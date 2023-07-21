@@ -81,8 +81,8 @@ socket.on('conn',(dat)=>{
 
 //this connection is to change both names in both players screen
 socket.on('messg',(tada)=>{
-//     document.getElementById("name1").innerHTML=tada.nom;
-//     document.getElementById("name2").innerHTML=tada.naam;
+    document.getElementById("name1").innerHTML=`${tada.nom}`;
+    document.getElementById("name2").innerHTML=`${tada.naam}`;
 })
 
 socket.on('mes',(data1)=>{
@@ -1045,14 +1045,93 @@ function move(A,B,C,D) {
 
 }
 
+var rn = 0;
 
-
+var variable = 0;
 // Add event listeners for socket events
 socket.on('pieceMoved', (moveData) => {
   console.log(moveData);
   var{piece,fromX,fromY,toX,toY,roomno} = moveData;
   console.log(piece,fromX,fromY,toX,toY,roomno);
+  rn = moveData.roomno;
+  variable++;
+
   move(fromX,fromY,toX,toY);
  
   // Function to handle click events on chessboard blocks
 });
+
+var matchtime1 = 600;
+var matchtime2 = 600;
+
+const white = document.getElementById('white')
+const black = document.getElementById('black')
+
+
+
+const button = document.getElementById('start');
+button.addEventListener('click',()=>{
+  socket.emit('clock','clicked')
+});
+const clock = document.getElementById('timer')
+
+function startCounter() {
+  let count = 1;
+  let interval;
+
+  interval = setInterval(() => {
+    console.log(count);
+    if (count <= 10) {
+      clock.textContent = count;
+      count++;
+    } else {
+      clearInterval(interval); // Stop the interval
+      clock.textContent = '';
+      white.textContent = matchtime1;
+      black.textContent = matchtime2;
+      socket.emit('match', 'match start');
+    }
+  }, 1000 * count);
+}
+
+
+
+socket.on('meg',(dta)=>{
+  // console.log(dta);
+  startCounter();
+})
+
+
+socket.on('matchstarted',(rata)=>{
+  // console.log(rata);
+  matchCounter();
+})
+
+
+var ca = 1;
+var da = 1;
+
+
+
+function matchCounter(){
+  setInterval(()=>{
+    if(variable%2==0){
+      white.textContent = matchtime1;
+      console.log("utube")
+      matchtime1--;
+      ca++;
+    }
+    if(matchtime1==0 && matchtime2!=0){
+      alert('Black Wins')
+    }
+    if(matchtime1!=0 && matchtime2 ==0 ){
+      alert('White Wins')
+    }
+    else{
+      black.textContent = matchtime2;
+      matchtime2--;
+      ca++;
+    }
+  },1000*ca);
+
+}

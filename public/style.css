@@ -48,7 +48,7 @@ body{
     cursor:pointer;
   }
   .info{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     position: absolute;
     height:95vh;
     width: 25vw;
@@ -62,8 +62,11 @@ body{
     height: 7vh;
     width: 20vw;
     font-size: 50px;
-    /* vertical-align: middle; */
-    /* padding-bottom: 5px; */
+    color: white;
+    background-color: green;
+    box-shadow: 0px 0px 10px rgba(27, 0, 81, 0.6);
+    border-radius: 10px;
+
     text-align: center;
     left: 2.5vw;
     top: 30px;
@@ -75,8 +78,12 @@ body{
     height: 7vh;
     width: 20vw;
     font-size: 50px;
+    color: white;
     text-align: center;
-    /* vertical-align:middle; */
+    background-color: green;
+    box-shadow: 0px 0px 10px rgba(27, 0, 81, 0.6);
+    border-radius: 10px;
+
     left: 2.5vw;
     bottom: 30px;
   }
@@ -84,13 +91,71 @@ body{
     border: 2px solid green;
     position: absolute;
     text-align: center;
-    /* padding-top: 30px; */
-
-    height: 55vh;
+    padding-top: 25vh;
+    font-size: 80px;
+    height: 32vh;
     width: 20vw;
     left: 2.5vw;
     top: 20.5%;
   }
+
+  .timer{
+    border: 2px solid red;
+    height: 12vh;
+    width: 15vw;
+    position: absolute;
+    z-index: 20;
+    top: 22vh;
+    left: 2.5vw;   
+  }
+
+  .white{
+    border: 2px solid red;
+    height: 15vh;
+    width: 15vw;
+    position: absolute;
+    z-index: 20;
+    top: 3vh;
+    left: 2.5vw;
+  }
+
+  .black{
+    border: 2px solid red;
+    height: 15vh;
+    width: 15vw;
+    position: absolute;
+    z-index: 20;
+    bottom: 3vh;
+    left: 2.5vw;
+  }
+
+
+
+#start {
+  position: absolute;
+  top: 5vh;
+  left: 77vw;
+  width: 20vw;
+  transform: translateY(-50%);
+  font-size: 24px;
+  background-color: rgb(1, 1, 73);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(1, 2, 75, 0.6); /* Adjust shadow values as needed */
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 30px;
+  padding: 10px;
+  cursor: pointer;
+}
+#start:hover{
+  transform: translateY(-2px); /* Adjust the translateY value for depth effect */
+  box-shadow: 0 4px 6px rgba(1, 1, 72, 100); 
+  /* transform: scale(1.2); */
+}
+
+#start:active{
+  transform: translateY(-2px); /* Adjust the translateY value for pressed effect */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Adjust shadow values for pressed effect */
+}
 
 
 

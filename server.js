@@ -20,62 +20,8 @@ const io = socketIO(server);
 
 var naam = "Yash";
 
-
-// //variables
-// let connectedPlayers = 0;
-// var roomno=1;
-// var full = 0;
-
-// io.on('connection',(socket)=>{
-//   connectedPlayers++;
-
-//   console.log('A user connected');
-//   console.log('Connected players:', connectedPlayers);
-
-
-//   r=roomno.toString();
-
-//   //room joining
-//   socket.join("room-"+r);
-//   io.sockets.in("room-"+r).emit('connectedRoom',"room-"+r);
-//   io.sockets.in("room-"+r).emit('mes',full);
-
-//   console.log("full->"+full+" room-> "+roomno);
-
-//   full++;
-//   if(full>=2){
-//     full=0;
-//     roomno++;
-//   }
-// // 
-//   // if(connected)
-
-
-
-
-//   socket.on('movePiece', (moveData) => {
-//     console.log(moveData);
-//     io.to(moveData.roomno).emit('pieceMoved',moveData);
-//     // Broadcast the move to all connected clients except the sender
-//     // io.emit('pieceMoved', moveData);
-//   });
-
-//   socket.on('disconnect', () => {
-//     connectedPlayers--;
-//     // full--;
-//     if(connectedPlayers===0){
-//       roomno=1;
-//     }
-//     console.log('A user disconnected');
-//     console.log('Connected Players:', connectedPlayers);
-//   });
-// });
-
-
-
 const port = process.env.PORT || 6025;
 app.use(express.json());
-app.use(express.static('./public'));
 app.use(express.static('./Login'));
 
 app.use(session({
@@ -89,11 +35,7 @@ app.use(session({
 // Set up the body parser middleware to parse request bodies
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/board', (req, res) => {
-    console.log(req.session.name);
-    naam = req.session.name;
-    res.sendFile(__dirname + '/public/index.html');
-});
+
 
 app.get('/login',(req,res)=>{
   res.sendFile(__dirname+'/Login/index.html');
@@ -111,14 +53,14 @@ app.post('/login',async (req,res)=>{
       return res.status(422).json({error:"Plz fill the fields properly"});
   }
 
-  const userExist  = await User.findOne({name:req.body.name})
-  if(userExist){
-      // return res.status(422).json({error:"name already exist"});
-      res.writeHead(302, {
-        'Location': 'http://localhost:6025/board'
-      });
-      res.end();
-  }
+  // const userExist  = await User.findOne({name:req.body.name})
+  // if(userExist){
+  //     // return res.status(422).json({error:"name already exist"});
+  //     res.writeHead(302, {
+  //       'Location': 'http://localhost:6025/board'
+  //     });
+  //     res.end();
+  // }
 
     const user1 = new User({name:req.body.name,phone:req.body.phone});
 
@@ -140,6 +82,14 @@ app.post('/login',async (req,res)=>{
 
 })
 
+//it should be present here otherwise on using localhost:6025/ this will get serve instead of login page
+app.use(express.static('./public'));
+
+app.get('/board', (req, res) => {
+  console.log(req.session.name);
+  naam = req.session.name;
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 
 
@@ -157,7 +107,7 @@ io.on('connection',(socket)=>{
 
   console.log('A user connected');
   console.log('Connected players:', connectedPlayers);
-  console.log("naam-> "+naam);
+  // console.log("naam-> "+naam);
 
 
   r=roomno.toString();
@@ -169,7 +119,7 @@ io.on('connection',(socket)=>{
 
   io.sockets.in("room-"+r).emit('mes',full);
 
-  console.log("full->"+full+" room-> "+roomno);
+  // console.log("full->"+full+" room-> "+roomno);
 
   full++;
   if(full>=2){
@@ -191,8 +141,21 @@ io.on('connection',(socket)=>{
     var y = roomno-1;
     //this is send both names to all the clients in the room
     io.sockets.in("room-"+y).emit('messg',data3);
-    
   })
+
+  socket.on('clock',(clock)=>{
+    console.log(clock)
+    var y = roomno-1;
+    io.sockets.in("room-"+y).emit('meg',clock);
+  })
+
+  socket.on('match',(match)=>{
+    console.log(match);
+    var y = roomno-1;
+    io.sockets.in("room-"+y).emit('matchstarted',match);
+
+  })
+  
 
   socket.on('disconnect', () => {
     connectedPlayers--;
@@ -204,6 +167,8 @@ io.on('connection',(socket)=>{
     console.log('Connected Players:', connectedPlayers);
   });
 });
+
+
 
 
 server.listen(port, () => {

@@ -15,7 +15,10 @@
             Player1
         </div>
 
-        <div class="clock">Clock
+        <div class="clock" id="clock">
+          <div class="timer" id="timer"></div>
+          <div class="white" id="white"></div>
+          <div class="black" id="black"></div>
 
         </div>
 
@@ -24,6 +27,7 @@
         </div>
     </span>
     <div class="main-frame"></div>
+    <button class="start" id="start">START</button>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./script.js"></script>
   </body>
