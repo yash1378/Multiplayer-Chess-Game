@@ -105,6 +105,20 @@ socket.on('disconnect', () => {
   t--;
 });
 
+socket.on('listitem',(item)=>{
+  let listcontainer = document.getElementById("movelist")
+  let list = listcontainer.querySelector("ul");
+
+  if (!list) {
+    list = document.createElement("ul");
+    listcontainer.appendChild(list);
+  }
+  var newitem = document.createElement("li");
+  newitem.textContent = item.piece+" "+"moved fromX -> "+item.fromX+" "+"fromY -> "+item.fromY+" "+"toX -> "+item.toX+" "+"toY -> "+item.toY;
+  console.log(newitem);
+  list.appendChild(newitem);
+})
+
 
 var chessboard=[
   ['0','0','0','0','0','0','0','0'],
@@ -1054,6 +1068,7 @@ socket.on('pieceMoved', (moveData) => {
   console.log(moveData);
   var{piece,fromX,fromY,toX,toY,roomno} = moveData;
   console.log(piece,fromX,fromY,toX,toY,roomno);
+  socket.emit('movelist',(moveData))
   rn = moveData.roomno;
   variable++;
 
@@ -1092,9 +1107,7 @@ function startCounter() {
       count++;
     } else {
       clearInterval(interval); // Stop the interval
-      clock.textContent = '';
-      // white.textContent = 600;
-      // black.textContent = 600;
+      clock.textContent = 'Started';
       socket.emit('match', 'match start');
     }
   }, 1000 * count);
@@ -1138,7 +1151,6 @@ function matchCounter() {
         matchtime2--;
       }
     }, 1000);
-
 }
 
 

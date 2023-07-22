@@ -149,6 +149,11 @@ io.on('connection',(socket)=>{
     io.sockets.in("room-"+y).emit('meg',clock);
   })
 
+  socket.on('movelist',(movelistitem)=>{
+    var y = roomno-1;
+    io.sockets.in("room-"+y).emit('listitem',movelistitem);
+  })
+
   socket.on('match',(match)=>{
     console.log(match);
     var y = roomno-1;

@@ -5,13 +5,15 @@ body{
   background-size:contain;
   height: 700px;
   width: 2300px; */
-  background-color: rgb(118, 244, 118);
+  /* background-color: rgb(118, 244, 118);
+   */
+   background-image: radial-gradient(circle, #ffffff, #90EE90,#228B22 );
 }
 
 .main-frame{
     border: 2px solid white;
     position: absolute;
-    left: 450px;
+    left: 400px;
     height: 710px;
     width: 680px;
     display: grid;
@@ -57,38 +59,50 @@ body{
     z-index:100;
   }
   .name1{
-    border: 2px solid green;
+    /* border: 2px solid green; */
     position: absolute;
     height: 7vh;
     width: 20vw;
-    font-size: 50px;
-    color: white;
-    background-color: green;
+    font-size: 70px;
+    color: rgb(4, 0, 116);
+    font-family: 'Source Code Pro', monospace;
+    -webkit-text-stroke: 0.25px #ffffff; /* Width and color of the text border */
+    text-stroke: 0.25px #ffffff;
+    /* background-color: green;
     box-shadow: 0px 0px 10px rgba(27, 0, 81, 0.6);
-    border-radius: 10px;
+    border-radius: 10px; */
+    /* background-image: radial-gradient(circle, #ffffff, #90EE90,#228B22 ); */
+    /* background: linear-gradient(135deg, #1904E5 10%,  #FAB2FF 100%); Replace this with your desired background color */
+  border-radius: 10px;
+  /* box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.7); */
 
     text-align: center;
-    left: 2.5vw;
+    left: 2vw;
     top: 30px;
   }
 
   .name2{
-    border: 2px solid green;
+    /* border: 2px solid green; */
+    font-size: 70px;
+    color: rgb(4, 0, 116);
+    font-family: 'Source Code Pro', monospace;
+    -webkit-text-stroke: 0.25px #ffffff; /* Width and color of the text border */
+    text-stroke: 0.25px #ffffff;
     position: absolute;
     height: 7vh;
     width: 20vw;
-    font-size: 50px;
+    /* font-size: 50px;
     color: white;
     text-align: center;
     background-color: green;
-    box-shadow: 0px 0px 10px rgba(27, 0, 81, 0.6);
+    box-shadow: 0px 0px 10px rgba(27, 0, 81, 0.6); */
     border-radius: 10px;
 
-    left: 2.5vw;
-    bottom: 30px;
+    left: 4vw;
+    bottom: 60px;
   }
   .clock{
-    border: 2px solid green;
+    /* border: 2px solid green; */
     position: absolute;
     text-align: center;
     padding-top: 25vh;
@@ -100,30 +114,32 @@ body{
   }
 
   .timer{
-    border: 2px solid red;
-    font-size: 90px;
+    /* border: 2px solid red; */
+    font-size: 100px;
     height: 12vh;
     width: 15vw;
     position: absolute;
     z-index: 20;
-    top: 22vh;
-    left: 2.5vw;   
+    top: 23vh;
+    left: 2vw;   
   }
 
   .white{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     height: 15vh;
     width: 15vw;
     position: absolute;
+    font-size: 120px;
     z-index: 20;
     top: 3vh;
     left: 2.5vw;
   }
 
   .black{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     height: 15vh;
     width: 15vw;
+    font-size: 120px;
     position: absolute;
     z-index: 20;
     bottom: 3vh;
@@ -158,9 +174,13 @@ body{
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Adjust shadow values for pressed effect */
 }
 
-
-
-
-
-
+.movelist{
+  height: 85vh;
+  width: 25vw;
+  z-index:30;
+  border: 2px solid red;
+  position: absolute;
+  bottom: 3.3vh;
+  right: 1.8vw;
+}
 
