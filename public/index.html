@@ -6,28 +6,30 @@
       name="viewport"
       content="wclassth=device-wclassth, initial-scale=1.0"
     />
+    <script
+    src="https://kit.fontawesome.com/c473aa4570.js"
+    crossorigin="anonymous"
+  ></script>
     <title>Board</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <span class="info">
-        <div class="name1" id="name1">
-            Player1
-        </div>
+      <div class="name1" id="name1">Player1</div>
 
-        <div class="clock" id="clock">
-          <div class="timer" id="timer" data-text="Timer Text">Hello</div>
-          <div class="white" id="white"></div>
-          <div class="black" id="black"></div>
+      <div class="clock" id="clock">
+        <div class="timer" id="timer" data-text="Timer Text">0</div>
+        <div class="white" id="white"></div>
+        <div class="black" id="black"></div>
+      </div>
 
-        </div>
-
-        <div class="name2" id="name2">
-            Player2
-        </div>
+      <div class="name2" id="name2">Player2</div>
     </span>
     <div class="main-frame"></div>
     <button class="start" id="start">START</button>
+    <div class="movelist" id="movelist">
+
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./script.js"></script>
   </body>
